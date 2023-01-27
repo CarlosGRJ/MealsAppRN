@@ -2,7 +2,6 @@ import React from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 import {
   NativeStackNavigationProp,
-  NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { CATEGORIES } from '../data/dummy-data';
 import CategoryGridTile from '../components/CategoryGridTile';
@@ -16,11 +15,6 @@ interface CategoriesScreenProps {
     undefined
   >;
 }
-
-type CategoriesScreenProps2 = NativeStackScreenProps<
-  RootStackParamList,
-  'MealsCategories'
->;
 
 const CategoriesScreen: React.FC<CategoriesScreenProps> = ({ navigation }) => {
   const renderCategoryItem: ListRenderItem<Category> = (

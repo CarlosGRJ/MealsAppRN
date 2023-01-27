@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, ListRenderItem } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 
 import Meal from '../models/meal';
-import { MEALS } from '../data/dummy-data';
+import { MEALS, CATEGORIES } from '../data/dummy-data';
 import { RootStackParamList } from '../App';
 import MealItem from '../components/MealItem';
+import { MealItemProps } from '../components/MealItem';
 
 interface MealsOverviewScreenProps {
   navigation: NativeStackNavigationProp<
     RootStackParamList,
-    'MealsCategories',
+    'MealsOverview',
     undefined
   >;
   route: RouteProp<RootStackParamList, 'MealsOverview'>;
@@ -26,8 +27,25 @@ const MealsOverviewScreen: React.FC<MealsOverviewScreenProps> = ({
     return mealItem.categoryIds.indexOf(catId) >= 0;
   });
 
-  const renderMealItem: ListRenderItem<Meal> = (itemData) => {
-    return <MealItem title={itemData.item.title} />;
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find(
+      (category) => category.id === catId,
+    )?.title;
+    navigation.setOptions({
+      title: categoryTitle,
+    });
+  }, [catId, navigation]);
+
+  const renderMealItem: ListRenderItem<Meal> = ({ item }) => {
+    const mealItemProps: MealItemProps = {
+      id: item.id,
+      title: item.title,
+      imageUrl: item.imageUrl,
+      affordability: item.affordability,
+      complexity: item.complexity,
+      duration: item.duration,
+    };
+    return <MealItem {...mealItemProps} />;
   };
 
   return (
