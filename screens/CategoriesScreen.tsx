@@ -11,7 +11,7 @@ import Category from '../models/category';
 interface CategoriesScreenProps {
   navigation: NativeStackNavigationProp<
     RootStackParamList,
-    'MealsCategories',
+    'Drawer',
     undefined
   >;
 }

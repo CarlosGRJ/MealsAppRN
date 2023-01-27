@@ -8,11 +8,6 @@ interface CategoryGridTileProps {
   title: string;
   color: string;
   onPress: () => void;
-  // navigation: NativeStackNavigationProp<
-  //   RootStackParamList,
-  //   'MealsCategories',
-  //   undefined
-  // >;
 }
 
 const CategoryGridTile: React.FC<CategoryGridTileProps> = ({
